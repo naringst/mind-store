@@ -8,6 +8,7 @@ export default function Header() {
     <StyledHeader>
       <h1>{title}</h1>
       <Button>+</Button>
+      <Button>-</Button>
     </StyledHeader>
   );
 }
