@@ -91,6 +91,7 @@ const Editor = () => {
             QuillRef.current = element;
           }
         }}
+        style={{ width: "660px", height: "200px" }}
         value={contents}
         onChange={setContents}
         modules={modules}
