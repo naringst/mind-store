@@ -14,7 +14,7 @@ export default function CreateNoteModal() {
 
   const openTagModalHandler = (e: any) => {
     e.preventDefault();
-    dispatch(tagModalActions.openModal());
+    dispatch(tagModalActions.openTagModal());
     console.log("open");
   };
 

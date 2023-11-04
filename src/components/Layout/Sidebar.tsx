@@ -8,8 +8,15 @@ import {
   AiOutlineCloseCircle,
   AiOutlineTag,
 } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { tagModalActions } from "../../store";
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
+  const openTagModalHandler = (e: any) => {
+    e.preventDefault();
+    dispatch(tagModalActions.openTagModal());
+  };
   return (
     <SideDiv>
       <StyledLink to="/">
@@ -39,7 +46,7 @@ export default function Sidebar() {
           </LiDiv>
         </Li>
         <Li>
-          <LiDiv>
+          <LiDiv onClick={openTagModalHandler}>
             <AiOutlineCloseCircle width="30px" height="30px" margin-top="5px" />
             <Span>태그 수정</Span>
           </LiDiv>
