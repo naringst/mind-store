@@ -19,16 +19,19 @@ function App() {
   const tagName = "note";
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="note" element={<Note />} />
-        <Route path="archive" element={<Archive />} />
-        <Route path="trash" element={<Trash />} />
-        {isModalOpen && <Route path="*" element={<CreateNoteModal />} />}
-        {isTagModalOpen && <Route path="*" element={<TagModal />} />}
-      </Route>
-    </Routes>
+    <>
+      {isModalOpen && <CreateNoteModal />}
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="note" element={<Note />} />
+          <Route path="archive" element={<Archive />} />
+          <Route path="trash" element={<Trash />} />
+
+          {isTagModalOpen && <Route path="*" element={<TagModal />} />}
+        </Route>
+      </Routes>
+    </>
   );
 }
 
