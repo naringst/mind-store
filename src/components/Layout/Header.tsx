@@ -23,7 +23,7 @@ export default function Header({ openModal }: any) {
 const StyledHeader = styled.header`
   padding-top: 10px;
   height: 75px;
-  width: 95%;
+  width: 78%;
   padding: 10px 0 10px 80px;
   margin: 0 100px 0 0;
   grid-area: Header;
