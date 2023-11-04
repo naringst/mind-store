@@ -73,10 +73,15 @@ const H1 = styled.h1`
   text-align: left;
 `;
 const SideDiv = styled.div`
-  width: 30vh;
-  height: 100vh;
+  width: 20%;
+  height: 100%;
   background-color: #fff0ba;
-  padding: 0 0px;
+  padding: 0;
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  bottom: 0;
+  width: 272px;
 `;
 
 const Span = styled.span`
