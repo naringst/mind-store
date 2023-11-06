@@ -1,14 +1,21 @@
 import React from "react";
 import { styled } from "styled-components";
+import { AiOutlinePushpin, AiTwotonePushpin } from "react-icons/ai";
 
-export default function Note() {
+type NoteType = {
+  title: string;
+};
+export default function Note(props: NoteType) {
   return (
     <NoteDiv>
       <BottomDiv>
-        <NoteTitle>제목</NoteTitle>
+        <NoteTitle>{props.title}</NoteTitle>
         <FlexDiv>
           <Priority>HIGH</Priority>
-          <Pin>핀</Pin>
+          <Pin>
+            <AiOutlinePushpin />
+            <AiTwotonePushpin />
+          </Pin>
         </FlexDiv>
       </BottomDiv>
       <Div>
@@ -33,8 +40,8 @@ export default function Note() {
 }
 
 const NoteDiv = styled.div`
-  width: 300px;
-  height: 250px;
+  width: 260px;
+  height: 220px;
   border-radius: 10px;
   background: pink;
   padding: 12px 20px;

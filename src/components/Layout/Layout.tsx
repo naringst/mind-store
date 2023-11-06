@@ -7,19 +7,34 @@ import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <div>
-      <Container className="App">
-        <Sidebar />
-        <RightDiv>
-          <Header />
-          <HomeDiv>
-            <Outlet />
-          </HomeDiv>
-        </RightDiv>
-      </Container>
-    </div>
+    <Container className="App">
+      <Sidebar />
+      <RightDiv>
+        <Header />
+        <HomeDiv>
+          <Outlet />
+        </HomeDiv>
+      </RightDiv>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+
+const RightDiv = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin-left: 100px;
+  @media screen and (max-width: 1016px) {
+    margin: 0;
+  }
+`;
 
 const HomeDiv = styled.div`
   width: 83%;
@@ -29,16 +44,9 @@ const HomeDiv = styled.div`
   height: 100vh;
   top: 100px;
   overflow: scroll;
-`;
 
-const Container = styled.div`
-  display: flex;
-  height: 100vh;
-`;
-
-const RightDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
+  @media screen and (max-width: 1016px) {
+    width: 100%;
+    position: static;
+  }
 `;
