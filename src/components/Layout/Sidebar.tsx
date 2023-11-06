@@ -19,76 +19,92 @@ export default function Sidebar() {
   };
   return (
     <SideDiv>
-      <StyledLink to="/">
-        <H1>기록공간</H1>
-      </StyledLink>
-      <Ul>
+      <aside>
+        {" "}
         <StyledLink to="/">
-          <Li>
-            <LiDiv>
-              <AiOutlineForm width="30px" height="30px" margin-top="5px" />
-              <Span>노트</Span>
-            </LiDiv>
-          </Li>
+          <H1>기록공간</H1>
         </StyledLink>
-        <StyledLink to="tag1">
+        <Ul>
+          <StyledLink to="/">
+            <Li>
+              <LiDiv>
+                <AiOutlineForm width="30px" height="30px" margin-top="5px" />
+                <Span>노트</Span>
+              </LiDiv>
+            </Li>
+          </StyledLink>
+          <StyledLink to="tag1">
+            <Li>
+              <LiDiv>
+                <AiOutlineTag width="30px" height="30px" margin-top="5px" />
+                <Span>태그1</Span>
+              </LiDiv>
+            </Li>
+          </StyledLink>
           <Li>
             <LiDiv>
               <AiOutlineTag width="30px" height="30px" margin-top="5px" />
-              <Span>태그1</Span>
+              <Span>태그2</Span>
             </LiDiv>
           </Li>
-        </StyledLink>
-        <Li>
-          <LiDiv>
-            <AiOutlineTag width="30px" height="30px" margin-top="5px" />
-            <Span>태그2</Span>
-          </LiDiv>
-        </Li>
-        <Li>
-          <LiDiv onClick={openTagModalHandler}>
-            <AiOutlineCloseCircle width="30px" height="30px" margin-top="5px" />
-            <Span>태그 수정</Span>
-          </LiDiv>
-        </Li>
-        <StyledLink to="archive">
           <Li>
-            <LiDiv>
-              <AiOutlineFolderOpen
+            <LiDiv onClick={openTagModalHandler}>
+              <AiOutlineCloseCircle
                 width="30px"
                 height="30px"
                 margin-top="5px"
               />
-              <Span>Archive</Span>
+              <Span>태그 수정</Span>
             </LiDiv>
           </Li>
-        </StyledLink>
-        <StyledLink to="trash">
-          <Li>
-            <LiDiv>
-              <AiOutlineDelete width="30px" height="30px" margin-top="5px" />
-              <Span>Trash</Span>
-            </LiDiv>
-          </Li>
-        </StyledLink>
-      </Ul>
+          <StyledLink to="archive">
+            <Li>
+              <LiDiv>
+                <AiOutlineFolderOpen
+                  width="30px"
+                  height="30px"
+                  margin-top="5px"
+                />
+                <Span>Archive</Span>
+              </LiDiv>
+            </Li>
+          </StyledLink>
+          <StyledLink to="trash">
+            <Li>
+              <LiDiv>
+                <AiOutlineDelete width="30px" height="30px" margin-top="5px" />
+                <Span>Trash</Span>
+              </LiDiv>
+            </Li>
+          </StyledLink>
+        </Ul>
+      </aside>
     </SideDiv>
   );
 }
-const H1 = styled.h1`
-  margin: 30px 60px;
-  text-align: left;
-`;
+
 const SideDiv = styled.div`
-  width: 20%;
   height: 100%;
   background-color: #fff0ba;
   padding: 0;
-  position: fixed;
+  position: absolute;
   left: 0;
   height: 100vh;
-  bottom: 0;
+  top: 0;
   width: 272px;
+  padding-left: 20px;
+
+  @media screen and (max-width: 1016px) {
+    visibility: hidden;
+    left: 0;
+    top: 0;
+    width: 0;
+  }
+`;
+
+const H1 = styled.h1`
+  margin: 30px 60px;
+  text-align: left;
 `;
 
 const Span = styled.span`
