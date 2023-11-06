@@ -91,7 +91,7 @@ const SideDiv = styled.div`
   left: 0;
   height: 100vh;
   top: 0;
-  width: 272px;
+  width: 232px;
   padding-left: 20px;
 
   @media screen and (max-width: 1016px) {
@@ -109,6 +109,7 @@ const H1 = styled.h1`
 
 const Span = styled.span`
   margin: 0 5px;
+  font-size: 20px;
 `;
 const Ul = styled.ul`
   padding-top: 5px;

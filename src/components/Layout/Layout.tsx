@@ -30,17 +30,18 @@ const RightDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  margin-left: 100px;
+  margin-left: 30px;
   @media screen and (max-width: 1016px) {
-    margin: 0;
+    margin: 0px;
   }
 `;
 
 const HomeDiv = styled.div`
-  width: 83%;
+  width: 83.5%;
+  padding-left: 0px;
   padding-right: 10px;
   position: fixed;
-  left: 280px;
+  left: 220px;
   height: 100vh;
   top: 100px;
   overflow: scroll;

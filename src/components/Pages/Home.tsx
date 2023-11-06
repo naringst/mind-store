@@ -28,13 +28,14 @@ const Div = styled.div`
   justify-content: center;
   margin-right: 100px;
 
-  @media screen and (max-width: 960) {
+  @media screen and (max-width: 960px) {
     width: 100%;
   }
 `;
 
 const NoteSearchInput = styled.input`
   padding: 2px 10px;
+
   width: 100%;
   height: 40px;
   border: 1px solid #d9d9d9;
@@ -43,7 +44,7 @@ const NoteSearchInput = styled.input`
   margin: 10px 0;
 
   @media screen and (max-width: 1016px) {
-    margin: 20px 80px;
+    margin: 20px 0px;
   }
 `;
 
