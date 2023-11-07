@@ -42,9 +42,6 @@ export const ModalBackdrop = styled.div`
 `;
 
 const ModalDiv = styled.div`
-  padding: 30px;
-  width: 700px;
-  height: 700px;
   z-index: 2;
   background: white;
 `;
