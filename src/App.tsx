@@ -9,26 +9,30 @@ import Layout from "./components/Layout/Layout";
 import Note from "./components/Pages/Note";
 import Archive from "./components/Pages/Archive";
 import Trash from "./components/Pages/Trash";
+import Tag from "./components/Pages/Tag";
+import { TagType } from "./store";
 
 function App() {
   const isModalOpen = useSelector((state: any) => state.modal.isModalOpen);
   const isTagModalOpen = useSelector(
-    (state: any) => state.modal.isTagModalOpen
+    (state: any) => state.tagModal.isTagModalOpen
   );
+
   //tags 가져오기
-  const tagName = "note";
+  const tagList = useSelector((state: any) => state.tag.tagList);
 
   return (
     <>
       {isModalOpen && <CreateNoteModal />}
+      {isTagModalOpen && <TagModal />}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="note" element={<Note />} />
+          {tagList.map((tag: TagType) => {
+            return <Route path={tag.name} element={<Tag name={tag.name} />} />;
+          })}
           <Route path="archive" element={<Archive />} />
           <Route path="trash" element={<Trash />} />
-
-          {isTagModalOpen && <Route path="*" element={<TagModal />} />}
         </Route>
       </Routes>
     </>
