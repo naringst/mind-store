@@ -8,8 +8,8 @@ import {
   AiOutlineCloseCircle,
   AiOutlineTag,
 } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { tagModalActions } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { State, TagType, tagModalActions } from "../../store";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -17,10 +17,12 @@ export default function Sidebar() {
     e.preventDefault();
     dispatch(tagModalActions.openTagModal());
   };
+
+  const tags = useSelector((state: any) => state.tag.tagList);
+
   return (
     <SideDiv>
       <aside>
-        {" "}
         <StyledLink to="/">
           <H1>기록공간</H1>
         </StyledLink>
@@ -33,20 +35,19 @@ export default function Sidebar() {
               </LiDiv>
             </Li>
           </StyledLink>
-          <StyledLink to="tag1">
-            <Li>
-              <LiDiv>
-                <AiOutlineTag width="30px" height="30px" margin-top="5px" />
-                <Span>태그1</Span>
-              </LiDiv>
-            </Li>
-          </StyledLink>
-          <Li>
-            <LiDiv>
-              <AiOutlineTag width="30px" height="30px" margin-top="5px" />
-              <Span>태그2</Span>
-            </LiDiv>
-          </Li>
+          {tags.map((tag: TagType) => {
+            return (
+              <StyledLink to={tag.name} key={tag.id}>
+                <Li>
+                  <LiDiv>
+                    <AiOutlineTag width="30px" height="30px" margin-top="5px" />
+                    <Span>{tag.name}</Span>
+                  </LiDiv>
+                </Li>
+              </StyledLink>
+            );
+          })}
+
           <Li>
             <LiDiv onClick={openTagModalHandler}>
               <AiOutlineCloseCircle
