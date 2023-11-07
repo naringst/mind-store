@@ -2,44 +2,123 @@ import { useDispatch } from "react-redux";
 import { tagModalActions } from "../../store";
 import styled from "styled-components";
 import Modal from "./Modal";
+import { CreateButton } from "./Modal.styles";
+import { tagActions } from "../../store";
+import { useState } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TagModal() {
+  const [inputText, setInputText] = useState<string>("");
+  const [id, setId] = useState<number>(0);
+
+  const tagList = useSelector((state: any) => state.tag.tagList);
+
+  console.log("tagList");
+  console.log(tagList);
+
   const dispatch = useDispatch();
   const closeTagModalHandler = (e: any) => {
     e.preventDefault();
     dispatch(tagModalActions.closeTagModal());
   };
+
+  const addTagHandler = (e: any) => {
+    if (e.key === "Enter") {
+      const newId = uuidv4();
+      console.log(newId);
+      console.log(typeof newId);
+      dispatch(tagActions.createNewTag({ id: uuidv4(), name: inputText }));
+
+      setInputText("");
+    }
+  };
+
+  const DeleteTagHandler = (e: any) => {
+    e.preventDefault();
+    dispatch(tagActions.deleteTag(e.target.id));
+    console.log(e.target.id);
+    console.log(e.target.name);
+  };
+
   return (
     <Modal>
       <TagModalDiv>
-        <button onClick={closeTagModalHandler}>x</button>
-        <ul>
-          <li>태그</li>
-        </ul>
+        <CreateButton onClick={closeTagModalHandler}>x</CreateButton>
+        <div>
+          <h3>태그 수정</h3>
+
+          <Input
+            placeholder="새 태그 입력 ... "
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={(e) => addTagHandler(e)}
+          />
+
+          {/* 기존 태그 렌더링 */}
+          <ul>
+            {tagList.map((tag: any) => {
+              return (
+                <Li>
+                  <ListDiv>
+                    <Span>{tag.name}</Span>
+                    <DeleteButton
+                      id={tag.id}
+                      name={tag.name}
+                      onClick={DeleteTagHandler}
+                    >
+                      x
+                    </DeleteButton>
+                  </ListDiv>
+                </Li>
+              );
+            })}
+          </ul>
+        </div>
       </TagModalDiv>
     </Modal>
   );
 }
 
-export const TagModalBackdrop = styled.div`
-  // Modal이 떴을 때의 배경을 깔아주는 CSS를 구현
-  z-index: 3; //위치지정 요소
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-`;
-
 const TagModalDiv = styled.div`
-  padding: 30px;
+  padding: 30px 40px;
   width: 300px;
   height: 300px;
   z-index: 4;
   background: white;
+  border-radius: 5px;
+  overflow: scroll;
 `;
+const Input = styled.input`
+  margin: 20px 0;
+  clear: both;
+  width: 205px;
+  height: 30px;
+  border: none;
+  border-bottom: 2px solid #a8a8a8;
+  cursor: pointer;
+  padding: 5px 10px;
+`;
+const Span = styled.span`
+  line-height: 30px;
+`;
+const ListDiv = styled.div`
+  line-height: 40px;
+  display: flex;
+  justify-content: space-between;
+`;
+const Li = styled.li`
+  list-style-type: none;
+  height: max-content;
+  margin: 10px 0;
+`;
+
+const DeleteButton = styled.button`
+  margin-left: 10px;
+  border: none;
+  padding: 0px 10px;
+  border-radius: 5px;
+`;
+function uuid4(): any {
+  throw new Error("Function not implemented.");
+}
