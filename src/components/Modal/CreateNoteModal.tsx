@@ -4,34 +4,52 @@ import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { modalActions, tagModalActions } from "../../store";
 import Modal from "./Modal";
+import { useState } from "react";
 
 export default function CreateNoteModal() {
+  const [backgroundColor, setBackgroundColor] = useState("white");
+  const [priority, setPriority] = useState("low");
   const dispatch = useDispatch();
+
+  //모달 닫기 버튼
   const closeModalHandler = (e: any) => {
     e.preventDefault();
     dispatch(modalActions.closeModal());
   };
 
+  //태그 모달 열기 버튼
   const openTagModalHandler = (e: any) => {
     e.preventDefault();
     dispatch(tagModalActions.openTagModal());
-    console.log("open");
   };
 
+  //배경 색 설정
+  const selectBackgroundColor = (e: any) => {
+    setBackgroundColor(e.target.value);
+    console.log(e.target.value);
+  };
+
+  //우선 순위 설정
+  const selectPriority = (e: any) => {
+    setPriority(e.target.value);
+  };
+
+  //노트 생성
+  const createNewNote = () => {};
   return (
     <Modal>
       <ModalDiv>
         <CreateButton onClick={closeModalHandler}>x</CreateButton>
         <div>
-          <h1>노트 생성하기</h1>
+          <h2>노트 생성하기</h2>
         </div>
-        <NoteNameInput></NoteNameInput>
-        <StyledEditor />
+        <NoteNameInput placeholder="제목을 입력하세요"></NoteNameInput>
+        <Editor backgroundColor={backgroundColor} />
         <BottomDiv>
-          <button onClick={openTagModalHandler}>태그 추가</button>
+          <CreateButton onClick={openTagModalHandler}>태그 추가</CreateButton>
           <div>
             <Label htmlFor="background-color">배경 색</Label>
-            <Select id="background-color">
+            <Select id="background-color" onChange={selectBackgroundColor}>
               <option value="white">흰색</option>
               <option value="red">빨간색</option>
               <option value="green">초록색</option>
@@ -40,13 +58,13 @@ export default function CreateNoteModal() {
           </div>
           <div>
             <Label htmlFor="background-color">우선순위</Label>
-            <Select>
+            <Select onChange={selectPriority}>
               <option value="low">낮음</option>
               <option value="high">높음</option>
             </Select>
           </div>
         </BottomDiv>
-        <CreateButton>생성하기</CreateButton>
+        <CreateButton onClick={createNewNote}>노트 생성</CreateButton>
       </ModalDiv>
     </Modal>
   );
@@ -55,34 +73,18 @@ export default function CreateNoteModal() {
 const ModalDiv = styled.div`
   padding: 30px;
   width: 700px;
-  height: 700px;
+  height: 600px;
   z-index: 10;
   background: white;
+  border-radius: 5px;
 `;
 const NoteNameInput = styled.input`
-  width: 660px;
+  width: 650px;
   height: 30px;
   margin: 10px 0;
-`;
-const StyledEditor = styled(Editor)`
-  width: 660px;
-  height: 300px;
-  background: red;
-`;
-
-export const ModalBackdrop = styled.div`
-  // Modal이 떴을 때의 배경을 깔아주는 CSS를 구현
-  z-index: 1; //위치지정 요소
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  border: 1px solid #a8a8a8;
+  border-radius: 5px;
+  padding: 3px 10px;
 `;
 
 const Label = styled.label`
@@ -94,17 +96,36 @@ const Select = styled.select`
   font-size: 16px;
   border-radius: 5px;
   outline: 0 none;
-  background: #d9d9d9;
+  background: #fff0ba;
   border: #d9d9d9;
   width: max-content;
   height: 30px;
 `;
 const BottomDiv = styled.div`
-  margin: 100px 0;
+  margin: 60px 0 30px 0;
   display: flex;
   justify-content: space-between;
 `;
 
+const StyledEditor = styled(Editor)<{ backgroundColor: string }>`
+  .ql-editor {
+    height: 100%;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+  }
+`;
+
 const CreateButton = styled.button`
   float: right;
+  width: max-content;
+  height: 30px;
+  padding: 5px 10px;
+  margin: 0;
+  border: none;
+  background: #fff0ba;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:hover {
+    background: #efe6cc;
+  }
 `;
