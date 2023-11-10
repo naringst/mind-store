@@ -1,15 +1,20 @@
 import "react-quill/dist/quill.snow.css";
 import Editor from "./Editor";
 import { styled } from "styled-components";
-import { useDispatch } from "react-redux";
-import { modalActions, tagModalActions } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { addedTagsActions, modalActions, tagModalActions } from "../../store";
 import Modal from "./Modal";
 import { useState } from "react";
+import { Tag } from "./Modal.styles";
 
 export default function CreateNoteModal() {
   const [backgroundColor, setBackgroundColor] = useState("white");
+
   const [priority, setPriority] = useState("low");
   const dispatch = useDispatch();
+
+  //추가된 태그
+  const addedTagList = useSelector((state: any) => state.addedTag.addedTagList);
 
   //모달 닫기 버튼
   const closeModalHandler = (e: any) => {
@@ -20,7 +25,16 @@ export default function CreateNoteModal() {
   //태그 모달 열기 버튼
   const openTagModalHandler = (e: any) => {
     e.preventDefault();
-    dispatch(tagModalActions.openTagModal());
+    dispatch(tagModalActions.openAddTagModal());
+  };
+
+  //태그 삭제
+  const deleteTag = (e: any) => {
+    e.preventDefault();
+    if (addedTagList.includes(e.target.id) === true) {
+      dispatch(addedTagsActions.deleteTag(e.target.id));
+    }
+    console.log(addedTagList);
   };
 
   //배경 색 설정
@@ -45,6 +59,15 @@ export default function CreateNoteModal() {
         </div>
         <NoteNameInput placeholder="제목을 입력하세요"></NoteNameInput>
         <Editor backgroundColor={backgroundColor} />
+        <TagDiv>
+          {addedTagList.map((tag: any) => {
+            return (
+              <Tag id={tag} onClick={deleteTag}>
+                {`${tag}    x`}
+              </Tag>
+            );
+          })}
+        </TagDiv>
         <BottomDiv>
           <CreateButton onClick={openTagModalHandler}>태그 추가</CreateButton>
           <div>
@@ -73,7 +96,7 @@ export default function CreateNoteModal() {
 const ModalDiv = styled.div`
   padding: 30px;
   width: 700px;
-  height: 600px;
+  height: 650px;
   z-index: 10;
   background: white;
   border-radius: 5px;
@@ -101,17 +124,16 @@ const Select = styled.select`
   width: max-content;
   height: 30px;
 `;
+
+const TagDiv = styled.div`
+  justify-content: left;
+  display: flex;
+  margin: 50px 0 10px 0;
+`;
 const BottomDiv = styled.div`
-  margin: 60px 0 30px 0;
+  margin: 10px 0 30px 0;
   display: flex;
   justify-content: space-between;
-`;
-
-const StyledEditor = styled(Editor)<{ backgroundColor: string }>`
-  .ql-editor {
-    height: 100%;
-    background-color: ${({ backgroundColor }) => backgroundColor};
-  }
 `;
 
 const CreateButton = styled.button`
