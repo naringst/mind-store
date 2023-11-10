@@ -14,3 +14,26 @@ export const CreateButton = styled.button`
     background: #efe6cc;
   }
 `;
+
+export const TagModalDiv = styled.div`
+  padding: 30px 40px;
+  width: 300px;
+  height: 300px;
+  z-index: 4;
+  background: white;
+  border-radius: 5px;
+  overflow: scroll;
+  margin: 0 auto;
+`;
+
+export const Tag = styled.button`
+  padding: 5px;
+  color: gray;
+  background: white;
+  border-radius: 5px;
+  margin: 10px 5px;
+  box-shadow: -1px 1px 1px 2px #d9d9d9;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+`;
