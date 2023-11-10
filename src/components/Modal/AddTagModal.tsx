@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
-import { CreateButton, TagModalDiv } from "./Modal.styles";
+import { CreateButton, Tag, TagModalDiv } from "./Modal.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteButton, Li, ListDiv, Span } from "./EditTagModal";
 import { addedTagsActions, tagModalActions } from "../../store";
@@ -15,6 +15,7 @@ export default function AddTagModal() {
     e.preventDefault();
     dispatch(tagModalActions.closeAddTagModal());
   };
+
   const selectTag = (e: any) => {
     e.preventDefault();
     if (addedTagList.includes(e.target.name) === false) {
@@ -26,10 +27,11 @@ export default function AddTagModal() {
   const deleteTag = (e: any) => {
     e.preventDefault();
     if (addedTagList.includes(e.target.id) === true) {
-      dispatch(addedTagsActions.deleteTag(e.target.name));
+      dispatch(addedTagsActions.deleteTag(e.target.id));
     }
     console.log(addedTagList);
   };
+
   return (
     <Modal>
       <TagModalDiv>
@@ -66,7 +68,6 @@ export default function AddTagModal() {
             );
           })}
         </TagBox>
-        <CompleteButton onClick={closeAddTagModalHandler}>저장</CompleteButton>
       </TagModalDiv>
     </Modal>
   );
@@ -74,16 +75,6 @@ export default function AddTagModal() {
 
 const TagBox = styled.div`
   margin: 25px 0;
-`;
-
-const Tag = styled.span`
-  padding: 5px;
-  color: gray;
-  background: #d9d9d9;
-  border-radius: 5px;
-  margin: 10px 5px;
-  font-size: 14px;
-  cursor: pointer;
 `;
 
 const CompleteButton = styled.button`
@@ -102,5 +93,7 @@ const CompleteButton = styled.button`
 `;
 
 const TagListDiv = styled.div`
-  margin: 25px 0;
+  margin: 25px 0 10px 0;
+  height: max-content;
+  padding: auto 0;
 `;
