@@ -10,6 +10,7 @@ import {
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { noteActions } from "../../store";
+import parse from "html-react-parser";
 
 export default function Note({
   id,
@@ -47,7 +48,7 @@ export default function Note({
         </FlexDiv>
       </BottomDiv>
       <Div>
-        <P>자리를 바꿨는데 1분단 제일 앞자리가 내 자리가 되었다. </P>
+        <P>{parse(content)} </P>
       </Div>
       <Div>
         {tags.map((tag: string) => {
