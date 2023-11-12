@@ -1,5 +1,5 @@
-import React from "react";
+import { PagesContainer } from "./Pages.styles";
 
 export default function Archive() {
-  return <div>Archive</div>;
+  return <PagesContainer>Archive</PagesContainer>;
 }

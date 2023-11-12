@@ -1,5 +1,5 @@
-import React from "react";
+import { PagesContainer } from "./Pages.styles";
 
 export default function Trash() {
-  return <div>Trash</div>;
+  return <PagesContainer>Trash</PagesContainer>;
 }
