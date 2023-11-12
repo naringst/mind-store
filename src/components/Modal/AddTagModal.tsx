@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Modal from "./Modal";
 import { CreateButton, Tag, TagModalDiv } from "./Modal.styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,21 +74,6 @@ export default function AddTagModal() {
 
 const TagBox = styled.div`
   margin: 25px 0;
-`;
-
-const CompleteButton = styled.button`
-  width: max-content;
-  height: 30px;
-  padding: 5px 10px;
-  float: right;
-  border: none;
-  background: #fff0ba;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:hover {
-    background: #efe6cc;
-  }
 `;
 
 const TagListDiv = styled.div`
