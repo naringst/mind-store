@@ -2,24 +2,32 @@ import "react-quill/dist/quill.snow.css";
 import Editor from "./Editor";
 import { styled } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { addedTagsActions, modalActions, tagModalActions } from "../../store";
+import {
+  addedTagsActions,
+  modalActions,
+  noteActions,
+  tagModalActions,
+} from "../../store";
 import Modal from "./Modal";
 import { useState } from "react";
 import { Tag } from "./Modal.styles";
+import { v4 } from "uuid";
 
 export default function CreateNoteModal() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("white");
-
   const [priority, setPriority] = useState("low");
   const dispatch = useDispatch();
 
   //추가된 태그
   const addedTagList = useSelector((state: any) => state.addedTag.addedTagList);
 
-  //모달 닫기 버튼
+  //노트 모달 닫기 버튼
   const closeModalHandler = (e: any) => {
     e.preventDefault();
     dispatch(modalActions.closeModal());
+    dispatch(addedTagsActions.deleteAllTag());
   };
 
   //태그 모달 열기 버튼
@@ -48,16 +56,41 @@ export default function CreateNoteModal() {
     setPriority(e.target.value);
   };
 
+  const setCContent = () => {
+    setContent("자리를 바꿨는데 1분단 제일 앞자리가 내 자리가 되었다. ");
+  };
   //노트 생성
-  const createNewNote = () => {};
+  const createNewNote = (e: any) => {
+    const createdTime = new Date();
+    setCContent();
+    dispatch(
+      noteActions.addNote({
+        id: v4(),
+        title: title,
+        priority: priority,
+        pinned: false,
+        content: content,
+        tags: [],
+        createdTime: createdTime.toLocaleString(),
+        color: backgroundColor,
+      })
+    );
+    dispatch(modalActions.closeModal());
+    dispatch(addedTagsActions.deleteAllTag());
+  };
+
   return (
     <Modal>
       <ModalDiv>
         <CreateButton onClick={closeModalHandler}>x</CreateButton>
         <div>
-          <h2>노트 생성하기</h2>
+          <h2>메모 생성하기</h2>
         </div>
-        <NoteNameInput placeholder="제목을 입력하세요"></NoteNameInput>
+        <NoteNameInput
+          placeholder="제목을 입력하세요"
+          value={title}
+          onChange={(e: any) => setTitle(e.target.value)}
+        ></NoteNameInput>
         <Editor backgroundColor={backgroundColor} />
         <TagDiv>
           {addedTagList.map((tag: any) => {
@@ -82,8 +115,8 @@ export default function CreateNoteModal() {
           <div>
             <Label htmlFor="background-color">우선순위</Label>
             <Select onChange={selectPriority}>
-              <option value="low">낮음</option>
-              <option value="high">높음</option>
+              <option value="LOW">낮음</option>
+              <option value="HIGH">높음</option>
             </Select>
           </div>
         </BottomDiv>
