@@ -31,7 +31,7 @@ export default function Sidebar() {
             <Li>
               <LiDiv>
                 <AiOutlineForm width="30px" height="30px" margin-top="5px" />
-                <Span>노트</Span>
+                <Span>전체 메모</Span>
               </LiDiv>
             </Li>
           </StyledLink>

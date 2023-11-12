@@ -4,7 +4,7 @@ import { modalActions } from "../../store";
 import { useDispatch } from "react-redux";
 
 export default function Header() {
-  const title: string = "노트";
+  const title: string = "메모";
 
   const dispatch = useDispatch();
   const openModalHandler = (e: any) => {
