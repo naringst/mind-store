@@ -1,37 +1,37 @@
 import { styled } from "styled-components";
 import Note from "./Note";
+import { PagesContainer } from "./Pages.styles";
+import { useSelector } from "react-redux";
+import { NoteType } from "../types/NoteType";
 
 export default function Home() {
+  const NoteList = useSelector((state: any) => state.note.noteList);
+
   return (
-    <Div>
+    <PagesContainer>
       <div style={{ width: "100%" }}>
         <NoteSearchInput placeholder="노트의 제목을 입력해주세요" />
       </div>
       <SortButton>정렬</SortButton>
       <NoteGrid>
-        <Note title="1"></Note>
-        <Note title="2"></Note>
-        <Note title="rk"></Note>
-        <Note title="rk"></Note>
+        {NoteList.map((note: NoteType) => {
+          return (
+            <Note
+              title={note.title}
+              id={note.id}
+              content={note.content}
+              priority={note.priority}
+              pinned={note.pinned}
+              tags={note.tags}
+              createdTime={note.createdTime}
+              color={note.color}
+            ></Note>
+          );
+        })}
       </NoteGrid>
-    </Div>
+    </PagesContainer>
   );
 }
-
-const Div = styled.div`
-  margin-bottom: 100px;
-  width: 100%;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  padding: 40px 80px;
-  justify-content: center;
-  margin-right: 100px;
-
-  @media screen and (max-width: 960px) {
-    width: 100%;
-  }
-`;
 
 const NoteSearchInput = styled.input`
   padding: 2px 10px;
