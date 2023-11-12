@@ -2,20 +2,17 @@ import { useDispatch } from "react-redux";
 import { tagModalActions } from "../../store";
 import styled from "styled-components";
 import Modal from "./Modal";
-import { CreateButton } from "./Modal.styles";
+import { CreateButton, TagModalDiv } from "./Modal.styles";
 import { tagActions } from "../../store";
 import { useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { v4 as uuidv4 } from "uuid";
 
-export default function TagModal() {
+export default function EditTagModal() {
   const [inputText, setInputText] = useState<string>("");
   const [id, setId] = useState<number>(0);
 
   const tagList = useSelector((state: any) => state.tag.tagList);
-
-  console.log("tagList");
-  console.log(tagList);
 
   const dispatch = useDispatch();
   const closeTagModalHandler = (e: any) => {
@@ -80,15 +77,6 @@ export default function TagModal() {
   );
 }
 
-const TagModalDiv = styled.div`
-  padding: 30px 40px;
-  width: 300px;
-  height: 300px;
-  z-index: 4;
-  background: white;
-  border-radius: 5px;
-  overflow: scroll;
-`;
 const Input = styled.input`
   margin: 20px 0;
   clear: both;
@@ -99,26 +87,23 @@ const Input = styled.input`
   cursor: pointer;
   padding: 5px 10px;
 `;
-const Span = styled.span`
+export const Span = styled.span`
   line-height: 30px;
 `;
-const ListDiv = styled.div`
+export const ListDiv = styled.div`
   line-height: 40px;
   display: flex;
   justify-content: space-between;
 `;
-const Li = styled.li`
+export const Li = styled.li`
   list-style-type: none;
   height: max-content;
   margin: 10px 0;
 `;
 
-const DeleteButton = styled.button`
+export const DeleteButton = styled.button`
   margin-left: 10px;
   border: none;
   padding: 0px 10px;
   border-radius: 5px;
 `;
-function uuid4(): any {
-  throw new Error("Function not implemented.");
-}
