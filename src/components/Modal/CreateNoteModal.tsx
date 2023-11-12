@@ -15,7 +15,7 @@ import { v4 } from "uuid";
 
 export default function CreateNoteModal() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [contents, setContents] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("white");
   const [priority, setPriority] = useState("low");
   const dispatch = useDispatch();
@@ -56,20 +56,22 @@ export default function CreateNoteModal() {
     setPriority(e.target.value);
   };
 
-  const setCContent = () => {
-    setContent("자리를 바꿨는데 1분단 제일 앞자리가 내 자리가 되었다. ");
+  const handleQuillContent = () => {
+    console.log(contents);
   };
+
+  //handleQuillContent();
+
   //노트 생성
   const createNewNote = (e: any) => {
     const createdTime = new Date();
-    setCContent();
     dispatch(
       noteActions.addNote({
         id: v4(),
         title: title,
         priority: priority,
         pinned: false,
-        content: content,
+        content: contents,
         tags: [],
         createdTime: createdTime.toLocaleString(),
         color: backgroundColor,
@@ -91,7 +93,11 @@ export default function CreateNoteModal() {
           value={title}
           onChange={(e: any) => setTitle(e.target.value)}
         ></NoteNameInput>
-        <Editor backgroundColor={backgroundColor} />
+        <Editor
+          backgroundColor={backgroundColor}
+          contents={contents}
+          setContents={setContents}
+        />
         <TagDiv>
           {addedTagList.map((tag: any) => {
             return (

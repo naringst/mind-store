@@ -6,9 +6,8 @@ import styled from "styled-components";
 interface EditorProps {
   backgroundColor: string;
 }
-const Editor = ({ backgroundColor }: EditorProps) => {
+const Editor = ({ backgroundColor, contents, setContents }: any) => {
   const QuillRef = useRef<ReactQuill>();
-  const [contents, setContents] = useState("");
 
   const modules = useMemo(
     () => ({
