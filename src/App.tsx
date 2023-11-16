@@ -11,6 +11,7 @@ import { TagType } from "./store/tag";
 
 import AddTagModal from "./components/Modal/AddTagModal";
 import EditTagModal from "./components/Modal/EditTagModal";
+import SortModal from "./components/Modal/SortModal";
 
 function App() {
   const isModalOpen = useSelector((state: any) => state.modal.isModalOpen);
@@ -21,7 +22,10 @@ function App() {
   const isAddTagModalOpen = useSelector(
     (state: any) => state.tagModal.isAddTagModalOpen
   );
-  //tags 가져오기
+
+  const isSortModalOpen = useSelector(
+    (state: any) => state.sortModal.isSortModalOpen
+  );
   const tagList = useSelector((state: any) => state.tag.tagList);
 
   return (
@@ -29,6 +33,7 @@ function App() {
       {isModalOpen && <CreateNoteModal />}
       {isAddTagModalOpen && <AddTagModal />}
       {isTagModalOpen && <EditTagModal />}
+      {isSortModalOpen && <SortModal />}
 
       <Routes>
         <Route path="/" element={<Layout />}>

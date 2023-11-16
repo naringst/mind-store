@@ -1,13 +1,16 @@
 import { styled } from "styled-components";
 import Note from "./Note";
 import { PagesContainer } from "./Pages.styles";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NoteType } from "../types/NoteType";
+import { sortModalActions } from "../../store";
 
 export default function Home() {
   const NoteList = useSelector((state: any) => state.note.noteList);
+  const dispatch = useDispatch();
   const openSortModal = (e: any) => {
     //dispatch sort modal open
+    dispatch(sortModalActions.openSortModal());
   };
 
   return (

@@ -34,13 +34,28 @@ const tagModalSlice = createSlice({
   },
 });
 
+const sortModalSlice = createSlice({
+  name: "sortModal",
+  initialState: { isSortModalOpen: false },
+  reducers: {
+    openSortModal(state) {
+      state.isSortModalOpen = true;
+    },
+    closeSortModal(state) {
+      state.isSortModalOpen = false;
+    },
+  },
+});
+
 export const modalActions = modalSlice.actions;
 export const tagModalActions = tagModalSlice.actions;
+export const sortModalActions = sortModalSlice.actions;
 
 export const store = configureStore({
   reducer: {
     modal: modalSlice.reducer,
     tagModal: tagModalSlice.reducer,
+    sortModal: sortModalSlice.reducer,
     tag: tagSlice.reducer,
     addedTag: addedTagsSlice.reducer,
     note: noteSlice.reducer,
