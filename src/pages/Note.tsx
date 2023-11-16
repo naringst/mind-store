@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import { AiOutlinePushpin, AiTwotonePushpin } from "react-icons/ai";
 import { Tag } from "../components/Modal/Modal.styles";
-import { NoteType } from "../components/types/NoteType";
+import { NoteType } from "../types/NoteType";
 import {
   AiOutlineFolderOpen,
   AiOutlineDelete,

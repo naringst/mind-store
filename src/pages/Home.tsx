@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import Note from "./Note";
 import { PagesContainer } from "./Pages.styles";
 import { useDispatch, useSelector } from "react-redux";
-import { NoteType } from "../components/types/NoteType";
+import { NoteType } from "../types/NoteType";
 import { sortModalActions } from "../store";
 
 export default function Home() {
