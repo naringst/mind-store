@@ -42,7 +42,6 @@ export default function CreateNoteModal() {
     if (addedTagList.includes(e.target.id) === true) {
       dispatch(addedTagsActions.deleteTag(e.target.id));
     }
-    console.log(addedTagList);
   };
 
   //배경 색 설정
@@ -65,6 +64,16 @@ export default function CreateNoteModal() {
   //노트 생성
   const createNewNote = (e: any) => {
     const createdTime = new Date();
+    console.log({
+      id: v4(),
+      title: title,
+      priority: priority,
+      pinned: false,
+      content: contents,
+      tags: [],
+      createdTime: createdTime.toLocaleString(),
+      color: backgroundColor,
+    });
     dispatch(
       noteActions.addNote({
         id: v4(),

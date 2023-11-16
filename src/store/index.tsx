@@ -112,6 +112,13 @@ const noteSlice = createSlice({
     deleteAllNote(state) {
       state.noteList = [];
     },
+    setPinState(state, action: PayloadAction<[string, boolean]>) {
+      state.noteList = state.noteList.map((note: any) =>
+        note.id === action.payload[0]
+          ? { ...note, pinned: action.payload[1] }
+          : note
+      );
+    },
   },
 });
 

@@ -17,8 +17,8 @@ export default function Home() {
         {NoteList.map((note: NoteType) => {
           return (
             <Note
-              title={note.title}
               id={note.id}
+              title={note.title}
               content={note.content}
               priority={note.priority}
               pinned={note.pinned}

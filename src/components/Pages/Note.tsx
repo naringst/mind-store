@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import { AiOutlinePushpin, AiTwotonePushpin } from "react-icons/ai";
 import { Tag } from "../Modal/Modal.styles";
@@ -8,7 +8,7 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
 } from "react-icons/ai";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { noteActions } from "../../store";
 import parse from "html-react-parser";
 
@@ -22,7 +22,9 @@ export default function Note({
   createdTime,
   color,
 }: NoteType) {
+  const [isPinned, setIspinned] = useState<boolean>(pinned);
   const dispatch = useDispatch();
+
   const noteEditHandler = (e: any) => {
     //노드 수정
     //노트 모달 켜고 켠 노트 모달에 원래 내용 담아서 ..
@@ -35,15 +37,21 @@ export default function Note({
   const archivingNoteHandler = (e: any) => {
     //아카이빙에 저장
   };
+
   return (
     <NoteDiv id={id} color={color}>
       <BottomDiv>
         <NoteTitle>{title}</NoteTitle>
         <FlexDiv>
           <Priority>{priority}</Priority>
-          <Pin>
-            {pinned && <AiOutlinePushpin />}
-            <AiTwotonePushpin />
+          <Pin
+            id={id}
+            onClick={(e: any) => {
+              setIspinned(!isPinned);
+              dispatch(noteActions.setPinState([id, !isPinned]));
+            }}
+          >
+            {isPinned ? <AiTwotonePushpin /> : <AiOutlinePushpin />}
           </Pin>
         </FlexDiv>
       </BottomDiv>
