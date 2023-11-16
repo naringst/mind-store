@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { AiOutlinePushpin, AiTwotonePushpin } from "react-icons/ai";
-import { Tag } from "../Modal/Modal.styles";
-import { NoteType } from "../types/NoteType";
+import { Tag } from "../components/Modal/Modal.styles";
+import { NoteType } from "../components/types/NoteType";
 import {
   AiOutlineFolderOpen,
   AiOutlineDelete,
   AiOutlineEdit,
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { noteActions } from "../../store/note";
+import { noteActions } from "../store/note";
 import parse from "html-react-parser";
 
 export default function Note({

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import "./App.css";
-import Home from "./components/Pages/Home";
+import Home from "./pages/Home";
 import CreateNoteModal from "./components/Modal/CreateNoteModal";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import Archive from "./components/Pages/Archive";
-import Trash from "./components/Pages/Trash";
-import Tag from "./components/Pages/Tag";
+import Archive from "./pages/Archive";
+import Trash from "./pages/Trash";
+import Tag from "./pages/Tag";
 import { TagType } from "./store/tag";
 
 import AddTagModal from "./components/Modal/AddTagModal";
