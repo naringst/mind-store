@@ -7,7 +7,7 @@ import Layout from "./components/Layout/Layout";
 import Archive from "./components/Pages/Archive";
 import Trash from "./components/Pages/Trash";
 import Tag from "./components/Pages/Tag";
-import { TagType } from "./store";
+import { TagType } from "./store/tag";
 
 import AddTagModal from "./components/Modal/AddTagModal";
 import EditTagModal from "./components/Modal/EditTagModal";

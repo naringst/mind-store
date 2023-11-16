@@ -2,7 +2,8 @@ import Modal from "./Modal";
 import { CreateButton, Tag, TagModalDiv } from "./Modal.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteButton, Li, ListDiv, Span } from "./EditTagModal";
-import { addedTagsActions, tagModalActions } from "../../store";
+import { tagModalActions } from "../../store";
+import { addedTagsActions } from "../../store/tag";
 import styled from "styled-components";
 
 export default function AddTagModal() {

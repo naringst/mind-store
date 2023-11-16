@@ -8,8 +8,8 @@ import {
   AiOutlineDelete,
   AiOutlineEdit,
 } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { noteActions } from "../../store";
+import { useDispatch } from "react-redux";
+import { noteActions } from "../../store/note";
 import parse from "html-react-parser";
 
 export default function Note({

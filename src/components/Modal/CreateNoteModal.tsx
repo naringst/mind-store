@@ -2,12 +2,9 @@ import "react-quill/dist/quill.snow.css";
 import Editor from "./Editor";
 import { styled } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addedTagsActions,
-  modalActions,
-  noteActions,
-  tagModalActions,
-} from "../../store";
+import { addedTagsActions } from "../../store/tag";
+import { noteActions } from "../../store/note";
+import { modalActions, tagModalActions } from "../../store";
 import Modal from "./Modal";
 import { useState } from "react";
 import { Tag } from "./Modal.styles";

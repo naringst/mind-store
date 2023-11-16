@@ -6,13 +6,16 @@ import { NoteType } from "../types/NoteType";
 
 export default function Home() {
   const NoteList = useSelector((state: any) => state.note.noteList);
+  const openSortModal = (e: any) => {
+    //dispatch sort modal open
+  };
 
   return (
     <PagesContainer>
       <div style={{ width: "100%" }}>
         <NoteSearchInput placeholder="노트의 제목을 입력해주세요" />
       </div>
-      <SortButton>정렬</SortButton>
+      <SortButton onClick={openSortModal}>정렬</SortButton>
       <NoteGrid>
         {NoteList.map((note: NoteType) => {
           return (
@@ -56,6 +59,7 @@ const SortButton = styled.button`
   border: none;
   border-radius: 5px;
   margin-left: auto;
+  cursor: pointer;
 `;
 
 const NoteGrid = styled.div`
