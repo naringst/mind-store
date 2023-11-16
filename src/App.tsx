@@ -3,7 +3,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import CreateNoteModal from "./components/Modal/CreateNoteModal";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
+import Layout from "./layouts/Layout";
 import Archive from "./pages/Archive";
 import Trash from "./pages/Trash";
 import Tag from "./pages/Tag";

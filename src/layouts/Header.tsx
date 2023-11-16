@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { modalActions } from "../../store";
+import { modalActions } from "../store";
 
 import { useDispatch } from "react-redux";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "../../pages/Home";
+import Home from "../pages/Home";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import styled from "styled-components";

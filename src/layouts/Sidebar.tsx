@@ -9,8 +9,8 @@ import {
   AiOutlineTag,
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { tagModalActions } from "../../store";
-import { TagType } from "../../store/tag";
+import { tagModalActions } from "../store";
+import { TagType } from "../store/tag";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
