@@ -1,6 +1,7 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 import { addedTagsSlice, tagSlice } from "./tag";
 import { noteSlice } from "./note";
+import { useDispatch } from "react-redux";
 
 const modalSlice = createSlice({
   name: "modal",
@@ -36,13 +37,16 @@ const tagModalSlice = createSlice({
 
 const sortModalSlice = createSlice({
   name: "sortModal",
-  initialState: { isSortModalOpen: false },
+  initialState: { isSortModalOpen: false, sortOption: "oldest" },
   reducers: {
     openSortModal(state) {
       state.isSortModalOpen = true;
     },
     closeSortModal(state) {
       state.isSortModalOpen = false;
+    },
+    setSortOption(state, action: PayloadAction<string>) {
+      state.sortOption = action.payload;
     },
   },
 });
