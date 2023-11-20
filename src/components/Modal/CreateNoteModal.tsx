@@ -60,7 +60,7 @@ export default function CreateNoteModal() {
 
   //노트 생성
   const createNewNote = (e: any) => {
-    const createdTime = new Date();
+    const createdTime = Date.now();
     console.log({
       id: v4(),
       title: title,
@@ -79,7 +79,7 @@ export default function CreateNoteModal() {
         pinned: false,
         content: contents,
         tags: [],
-        createdTime: createdTime.toLocaleString(),
+        createdTime: new Date(createdTime),
         color: backgroundColor,
       })
     );
