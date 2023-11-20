@@ -64,7 +64,7 @@ export default function Note({
         })}
       </Div>
       <BottomDiv>
-        <CreatedTimeP>{createdTime}</CreatedTimeP>
+        <CreatedTimeP>{createdTime.toLocaleString()}</CreatedTimeP>
         <IconsDiv>
           <StyledAiOutlineEdit size="25px" id={id} onClick={noteEditHandler} />
           <StyledAiOutlineFolderOpen

@@ -4,14 +4,40 @@ import { PagesContainer } from "./Pages.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { NoteType } from "../types/NoteType";
 import { sortModalActions } from "../store";
+import { useEffect } from "react";
+import { AnyARecord } from "dns";
+import { noteActions } from "../store/note";
 
 export default function Home() {
-  const NoteList = useSelector((state: any) => state.note.noteList);
+  let NoteList = useSelector((state: any) => state.note.noteList);
+  const sortOption = useSelector((state: any) => state.sortModal.setSortOption);
   const dispatch = useDispatch();
+
   const openSortModal = (e: any) => {
-    //dispatch sort modal open
     dispatch(sortModalActions.openSortModal());
   };
+
+  // const handleSort = () => {
+  //   if (sortOption === "latest") {
+  //     NoteList = NoteList.sort((a: any, b: any): number => {
+  //       return (
+  //         +new Date(b.createdTime).getTime() -
+  //         +new Date(a.createdTime).getTime()
+  //       );
+  //     });
+  //   } else if (sortOption === "oldest") {
+  //     NoteList = NoteList.sort((a: any, b: any): number => {
+  //       return (
+  //         +new Date(b.createdTime).getTime() -
+  //         +new Date(a.createdTime).getTime()
+  //       );
+  //     });
+  //   }
+  // };
+
+  useEffect(() => {
+    // handleSort();
+  }, [NoteList]);
 
   return (
     <PagesContainer>

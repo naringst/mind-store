@@ -28,6 +28,44 @@ export const noteSlice = createSlice({
           : note
       );
     },
+
+    setSortCategory(state, action: PayloadAction<string>) {
+      if (action.payload === "lowFirst") {
+        state.noteList = state.noteList.sort((a: any, b: any): number => {
+          if (a.priority.length > b.priority.length) {
+            return 1;
+          }
+          return -1;
+        });
+      }
+
+      if (action.payload === "highFirst") {
+        state.noteList = state.noteList.sort((a: any, b: any): number => {
+          if (a.priority.length < b.priority.length) {
+            return 1;
+          }
+          return -1;
+        });
+      }
+      if (action.payload === "latest") {
+        //오름차순 정렬 적용
+        state.noteList = state.noteList.sort((a: any, b: any): number => {
+          return (
+            +new Date(b.createdTime).getTime() -
+            +new Date(a.createdTime).getTime()
+          );
+        });
+      }
+      if (action.payload === "oldest") {
+        //내림차순 정렬 적용
+        state.noteList = state.noteList.sort((a: any, b: any): number => {
+          return (
+            +new Date(a.createdTime).getTime() -
+            +new Date(b.createdTime).getTime()
+          );
+        });
+      }
+    },
   },
 });
 

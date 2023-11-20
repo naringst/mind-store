@@ -6,10 +6,14 @@ export interface NoteType {
   pinned: boolean;
   content: string;
   tags: string[];
-  createdTime: String;
+  createdTime: Date;
   color: string;
 }
 
 export interface NoteListType {
   noteList: NoteType[];
+}
+
+export interface TrashListType {
+  trashList: NoteType[];
 }

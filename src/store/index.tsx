@@ -37,7 +37,7 @@ const tagModalSlice = createSlice({
 
 const sortModalSlice = createSlice({
   name: "sortModal",
-  initialState: { isSortModalOpen: false, sortOption: "oldest" },
+  initialState: { isSortModalOpen: false, sortOption: "" },
   reducers: {
     openSortModal(state) {
       state.isSortModalOpen = true;
