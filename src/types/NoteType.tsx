@@ -12,6 +12,8 @@ export interface NoteType {
 
 export interface NoteListType {
   noteList: NoteType[];
+  isEdit: boolean;
+  updateNote: NoteType[];
 }
 
 export interface TrashListType {

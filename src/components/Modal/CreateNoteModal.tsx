@@ -6,7 +6,7 @@ import { addedTagsActions } from "../../store/tag";
 import { noteActions } from "../../store/note";
 import { modalActions, tagModalActions } from "../../store";
 import Modal from "./Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tag } from "./Modal.styles";
 import { v4 } from "uuid";
 
@@ -19,12 +19,28 @@ export default function CreateNoteModal() {
 
   //추가된 태그
   const addedTagList = useSelector((state: any) => state.addedTag.addedTagList);
+  const updateNote = useSelector((state: any) => state.note.updateNote);
+  const isEdit = useSelector((state: any) => state.note.isEdit);
 
+  const checkIsEdit = () => {
+    if (isEdit === true) {
+      setTitle(updateNote[0].title);
+      setContents(updateNote[0].content);
+      setBackgroundColor(updateNote[0].color);
+      setPriority(updateNote[0].priority);
+      //태그 렌더링?
+    }
+  };
+
+  useEffect(() => {
+    checkIsEdit();
+  }, []);
   //노트 모달 닫기 버튼
   const closeModalHandler = (e: any) => {
     e.preventDefault();
     dispatch(modalActions.closeModal());
     dispatch(addedTagsActions.deleteAllTag());
+    dispatch(noteActions.exitUpdateNote());
   };
 
   //태그 모달 열기 버튼
@@ -52,25 +68,12 @@ export default function CreateNoteModal() {
     setPriority(e.target.value);
   };
 
-  const handleQuillContent = () => {
-    console.log(contents);
-  };
-
   //handleQuillContent();
 
   //노트 생성
   const createNewNote = (e: any) => {
     const createdTime = Date.now();
-    console.log({
-      id: v4(),
-      title: title,
-      priority: priority,
-      pinned: false,
-      content: contents,
-      tags: [],
-      createdTime: createdTime.toLocaleString(),
-      color: backgroundColor,
-    });
+
     dispatch(
       noteActions.addNote({
         id: v4(),
@@ -85,17 +88,54 @@ export default function CreateNoteModal() {
     );
     dispatch(modalActions.closeModal());
     dispatch(addedTagsActions.deleteAllTag());
+    setTitle("");
+    setContents("");
+    setBackgroundColor("white");
+    setPriority("low");
+  };
+
+  const updateNoteHandler = () => {
+    const createdTime = Date.now();
+    dispatch(
+      noteActions.editNote({
+        id: updateNote[0].id,
+        title: title,
+        priority: priority,
+        pinned: updateNote[0].pinned,
+        content: contents,
+        tags: [...updateNote[0].tags],
+        createdTime: new Date(createdTime),
+        color: backgroundColor,
+      })
+    );
+    dispatch(modalActions.closeModal());
+    dispatch(addedTagsActions.deleteAllTag());
+    setTitle("");
+    setContents("");
+    setBackgroundColor("white");
+    setPriority("low");
   };
 
   return (
     <Modal>
       <ModalDiv>
-        <CreateButton onClick={closeModalHandler}>x</CreateButton>
-        <div>
-          <h2>메모 생성하기</h2>
-        </div>
+        {isEdit ? (
+          <>
+            <CreateButton onClick={closeModalHandler}> x</CreateButton>
+            <div>
+              <h2>메모 수정하기</h2>
+            </div>
+          </>
+        ) : (
+          <>
+            <CreateButton onClick={closeModalHandler}>x</CreateButton>
+            <div>
+              <h2>메모 생성하기</h2>
+            </div>
+          </>
+        )}
+
         <NoteNameInput
-          placeholder="제목을 입력하세요"
           value={title}
           onChange={(e: any) => setTitle(e.target.value)}
         ></NoteNameInput>
@@ -118,21 +158,37 @@ export default function CreateNoteModal() {
           <div>
             <Label htmlFor="background-color">배경 색</Label>
             <Select id="background-color" onChange={selectBackgroundColor}>
-              <option value="white">흰색</option>
-              <option value="red">빨간색</option>
-              <option value="green">초록색</option>
-              <option value="blue">파란색</option>
+              <option value="white" selected={"white" === backgroundColor}>
+                흰색
+              </option>
+              <option value="red" selected={"red" === backgroundColor}>
+                빨간색
+              </option>
+              <option value="green" selected={"green" === backgroundColor}>
+                초록색
+              </option>
+              <option value="blue" selected={"blue" === backgroundColor}>
+                파란색
+              </option>
             </Select>
           </div>
           <div>
             <Label htmlFor="background-color">우선순위</Label>
             <Select onChange={selectPriority}>
-              <option value="LOW">낮음</option>
-              <option value="HIGH">높음</option>
+              <option value="LOW" selected={"LOW" === priority}>
+                낮음
+              </option>
+              <option value="HIGH" selected={"HIGH" === priority}>
+                높음
+              </option>
             </Select>
           </div>
         </BottomDiv>
-        <CreateButton onClick={createNewNote}>노트 생성</CreateButton>
+        {isEdit ? (
+          <CreateButton onClick={updateNoteHandler}>노트 수정</CreateButton>
+        ) : (
+          <CreateButton onClick={createNewNote}>노트 생성</CreateButton>
+        )}
       </ModalDiv>
     </Modal>
   );

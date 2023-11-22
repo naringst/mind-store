@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { NoteListType, NoteType } from "../types/NoteType";
 
-const initialNoteState: NoteListType = { noteList: [] };
+const initialNoteState: NoteListType = {
+  noteList: [],
+  isEdit: false,
+  updateNote: [],
+};
 
 export const noteSlice = createSlice({
   name: "note",
@@ -20,6 +24,22 @@ export const noteSlice = createSlice({
     },
     deleteAllNote(state) {
       state.noteList = [];
+    },
+    updateNote(state, action: PayloadAction<string>) {
+      state.isEdit = true;
+      state.updateNote = state.noteList.filter((note: NoteType) => {
+        return note.id === action.payload;
+      });
+    },
+    exitUpdateNote(state) {
+      state.isEdit = false;
+    },
+    editNote(state, action: PayloadAction<NoteType>) {
+      //노트 내용 수정 반영
+      const updatedNote = action.payload;
+      state.noteList = state.noteList.map((note: NoteType) => {
+        return updatedNote.id === note.id ? updatedNote : note;
+      });
     },
     setPinState(state, action: PayloadAction<[string, boolean]>) {
       state.noteList = state.noteList.map((note: any) =>

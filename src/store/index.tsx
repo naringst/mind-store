@@ -2,16 +2,22 @@ import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 import { addedTagsSlice, tagSlice } from "./tag";
 import { noteSlice } from "./note";
 import { useDispatch } from "react-redux";
+import { NoteType } from "../types/NoteType";
 
+//노트 생성 모달
 const modalSlice = createSlice({
   name: "modal",
-  initialState: { isModalOpen: false },
+  initialState: { isModalOpen: false, isEdit: false },
   reducers: {
     openModal(state) {
       state.isModalOpen = true;
     },
     closeModal(state) {
       state.isModalOpen = false;
+    },
+    openUpdateModal(state, action: PayloadAction<NoteType>) {
+      state.isModalOpen = true;
+      state.isEdit = true;
     },
   },
 });

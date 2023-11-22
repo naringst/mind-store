@@ -11,6 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 import { noteActions } from "../store/note";
 import parse from "html-react-parser";
+import { modalActions } from "../store";
 
 export default function Note({
   id,
@@ -25,9 +26,11 @@ export default function Note({
   const [isPinned, setIspinned] = useState<boolean>(pinned);
   const dispatch = useDispatch();
 
-  const noteEditHandler = (e: any) => {
-    //노드 수정
-    //노트 모달 켜고 켠 노트 모달에 원래 내용 담아서 ..
+  const updateNote = (e: any) => {
+    dispatch(modalActions.openModal());
+    dispatch(noteActions.updateNote(e.target.id));
+    //isEdit으로 바꾸고
+    //해당 노트를 보내
   };
   const DeleteNoteHandler = (e: any) => {
     //노트 삭제
@@ -66,7 +69,7 @@ export default function Note({
       <BottomDiv>
         <CreatedTimeP>{createdTime.toLocaleString()}</CreatedTimeP>
         <IconsDiv>
-          <StyledAiOutlineEdit size="25px" id={id} onClick={noteEditHandler} />
+          <StyledAiOutlineEdit size="25px" id={id} onClick={updateNote} />
           <StyledAiOutlineFolderOpen
             id={id}
             size="25px"
