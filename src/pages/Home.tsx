@@ -91,7 +91,7 @@ const SortButton = styled.button`
   cursor: pointer;
 `;
 
-const NoteGrid = styled.div`
+export const NoteGrid = styled.div`
   width: 100%;
   margin: 40px 0;
 

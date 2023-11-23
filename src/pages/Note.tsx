@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { noteActions } from "../store/note";
 import parse from "html-react-parser";
 import { modalActions } from "../store";
+import { trashActions } from "../store/trash";
 
 export default function Note({
   id,
@@ -35,6 +36,18 @@ export default function Note({
   const DeleteNoteHandler = (e: any) => {
     //노트 삭제
     dispatch(noteActions.deleteNote(e.target.id));
+    dispatch(
+      trashActions.addTrash({
+        id,
+        title,
+        priority,
+        pinned,
+        content,
+        tags,
+        createdTime,
+        color,
+      })
+    );
   };
 
   const archivingNoteHandler = (e: any) => {
@@ -73,12 +86,12 @@ export default function Note({
           <StyledAiOutlineFolderOpen
             id={id}
             size="25px"
-            onClick={DeleteNoteHandler}
+            onClick={archivingNoteHandler}
           />
           <StyledAiOutlineDelete
             id={id}
             size="25px"
-            onClick={archivingNoteHandler}
+            onClick={DeleteNoteHandler}
           />
         </IconsDiv>
       </BottomDiv>

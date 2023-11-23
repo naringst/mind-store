@@ -3,6 +3,7 @@ import { addedTagsSlice, tagSlice } from "./tag";
 import { noteSlice } from "./note";
 import { useDispatch } from "react-redux";
 import { NoteType } from "../types/NoteType";
+import { trashSlice } from "./trash";
 
 //노트 생성 모달
 const modalSlice = createSlice({
@@ -69,5 +70,6 @@ export const store = configureStore({
     tag: tagSlice.reducer,
     addedTag: addedTagsSlice.reducer,
     note: noteSlice.reducer,
+    trash: trashSlice.reducer,
   },
 });
