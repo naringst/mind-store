@@ -19,3 +19,7 @@ export interface NoteListType {
 export interface TrashListType {
   trashList: NoteType[];
 }
+
+export interface ArchiveListType {
+  archiveList: NoteType[];
+}

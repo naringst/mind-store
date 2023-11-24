@@ -13,6 +13,7 @@ import { noteActions } from "../store/note";
 import parse from "html-react-parser";
 import { modalActions } from "../store";
 import { trashActions } from "../store/trash";
+import { archiveActions } from "../store/archive";
 
 export default function Note({
   id,
@@ -52,6 +53,19 @@ export default function Note({
 
   const archivingNoteHandler = (e: any) => {
     //아카이빙에 저장
+    dispatch(noteActions.deleteNote(e.target.id));
+    dispatch(
+      archiveActions.addArchive({
+        id,
+        title,
+        priority,
+        pinned,
+        content,
+        tags,
+        createdTime,
+        color,
+      })
+    );
   };
 
   return (
