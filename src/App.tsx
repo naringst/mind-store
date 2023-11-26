@@ -18,11 +18,9 @@ function App() {
   const isTagModalOpen = useSelector(
     (state: any) => state.tagModal.isTagModalOpen
   );
-
   const isAddTagModalOpen = useSelector(
     (state: any) => state.tagModal.isAddTagModalOpen
   );
-
   const isSortModalOpen = useSelector(
     (state: any) => state.sortModal.isSortModalOpen
   );

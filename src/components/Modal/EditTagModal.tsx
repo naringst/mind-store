@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { tagModalActions } from "../../store";
 import styled from "styled-components";
 import Modal from "./Modal";
-import { CreateButton, TagModalDiv } from "./Modal.styles";
+import { TagModalDiv, CreateButton } from "./Modal.styles";
 import { tagActions } from "../../store/tag";
 import { useState } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
