@@ -59,7 +59,17 @@ export default function CreateNoteModal() {
 
   //배경 색 설정
   const selectBackgroundColor = (e: any) => {
-    setBackgroundColor(e.target.value);
+    if (e.target.value === "orange") {
+      setBackgroundColor("#efaa52");
+    } else if (e.target.value === "green") {
+      setBackgroundColor("#ddeecc");
+    } else if (e.target.value === "blue") {
+      setBackgroundColor("#c4d4e0");
+    } else if (e.target.value === "yellow") {
+      setBackgroundColor("#fff0ba");
+    } else if (e.target.value === "pink") {
+      setBackgroundColor("#ffc5bf");
+    }
     console.log(e.target.value);
   };
 
@@ -161,13 +171,16 @@ export default function CreateNoteModal() {
               <option value="white" selected={"white" === backgroundColor}>
                 흰색
               </option>
-              <option value="red" selected={"red" === backgroundColor}>
-                빨간색
+              <option value="yellow" selected={"#fff0ba" === backgroundColor}>
+                노란색
               </option>
-              <option value="green" selected={"green" === backgroundColor}>
+              <option value="pink" selected={"#ffc5bf" === backgroundColor}>
+                핑크색
+              </option>
+              <option value="green" selected={"#ddeecc" === backgroundColor}>
                 초록색
               </option>
-              <option value="blue" selected={"blue" === backgroundColor}>
+              <option value="blue" selected={"#c4d4e0" === backgroundColor}>
                 파란색
               </option>
             </Select>
