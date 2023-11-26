@@ -4,63 +4,82 @@ import { PagesContainer } from "./Pages.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { NoteType } from "../types/NoteType";
 import { sortModalActions } from "../store";
-import { useEffect } from "react";
-import { AnyARecord } from "dns";
-import { noteActions } from "../store/note";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   let NoteList = useSelector((state: any) => state.note.noteList);
-  const sortOption = useSelector((state: any) => state.sortModal.setSortOption);
+  const [userInput, setUserInput] = useState<string>("");
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [searchNoteList, setSearchNoteList] = useState<NoteType[]>(NoteList);
   const dispatch = useDispatch();
 
   const openSortModal = (e: any) => {
     dispatch(sortModalActions.openSortModal());
   };
 
-  // const handleSort = () => {
-  //   if (sortOption === "latest") {
-  //     NoteList = NoteList.sort((a: any, b: any): number => {
-  //       return (
-  //         +new Date(b.createdTime).getTime() -
-  //         +new Date(a.createdTime).getTime()
-  //       );
-  //     });
-  //   } else if (sortOption === "oldest") {
-  //     NoteList = NoteList.sort((a: any, b: any): number => {
-  //       return (
-  //         +new Date(b.createdTime).getTime() -
-  //         +new Date(a.createdTime).getTime()
-  //       );
-  //     });
-  //   }
-  // };
+  const searchNoteChange = (e: any) => {
+    if (e.target.value.length === 0) {
+      setIsSearching(false);
+    } else {
+      setIsSearching(true);
+    }
+    setUserInput(e.target.value);
+    setSearchNoteList(
+      NoteList.filter((item: any) => item.title.includes(e.target.value))
+    );
+  };
 
-  useEffect(() => {
-    // handleSort();
-  }, [NoteList]);
+  useEffect(() => {}, [NoteList]);
 
   return (
     <PagesContainer>
       <div style={{ width: "100%" }}>
-        <NoteSearchInput placeholder="노트의 제목을 입력해주세요" />
+        <NoteSearchInput
+          placeholder="노트의 제목을 입력해주세요"
+          onChange={searchNoteChange}
+          value={userInput}
+        />
       </div>
       <SortButton onClick={openSortModal}>정렬</SortButton>
-      <NoteGrid>
-        {NoteList.map((note: NoteType) => {
-          return (
-            <Note
-              id={note.id}
-              title={note.title}
-              content={note.content}
-              priority={note.priority}
-              pinned={note.pinned}
-              tags={note.tags}
-              createdTime={note.createdTime}
-              color={note.color}
-            ></Note>
-          );
-        })}
-      </NoteGrid>
+
+      {isSearching ? (
+        <div>
+          <SearchingSpan>"{userInput}" 검색 결과</SearchingSpan>
+          <NoteGrid>
+            {searchNoteList.map((note: NoteType) => {
+              return (
+                <Note
+                  id={note.id}
+                  title={note.title}
+                  content={note.content}
+                  priority={note.priority}
+                  pinned={note.pinned}
+                  tags={note.tags}
+                  createdTime={note.createdTime}
+                  color={note.color}
+                ></Note>
+              );
+            })}
+          </NoteGrid>
+        </div>
+      ) : (
+        <NoteGrid>
+          {NoteList.map((note: NoteType) => {
+            return (
+              <Note
+                id={note.id}
+                title={note.title}
+                content={note.content}
+                priority={note.priority}
+                pinned={note.pinned}
+                tags={note.tags}
+                createdTime={note.createdTime}
+                color={note.color}
+              ></Note>
+            );
+          })}
+        </NoteGrid>
+      )}
     </PagesContainer>
   );
 }
@@ -89,6 +108,11 @@ const SortButton = styled.button`
   border-radius: 5px;
   margin-left: auto;
   cursor: pointer;
+`;
+
+const SearchingSpan = styled.span`
+  margin-bottom: 30px;
+  padding-bottom: 30px;
 `;
 
 export const NoteGrid = styled.div`
