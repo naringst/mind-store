@@ -71,7 +71,11 @@ export default function Note({
   return (
     <NoteDiv id={id} color={color}>
       <BottomDiv>
-        <NoteTitle>{title}</NoteTitle>
+        {title.length > 8 ? (
+          <NoteTitle>{title.substring(0, 7)}..</NoteTitle>
+        ) : (
+          <NoteTitle>{title}</NoteTitle>
+        )}
         <FlexDiv>
           <Priority>{priority}</Priority>
           <Pin
@@ -86,7 +90,7 @@ export default function Note({
         </FlexDiv>
       </BottomDiv>
       <Div>
-        <P>{parse(content)} </P>
+        {parse(content) ? <P>{parse(content)} </P> : <P>{parse(content)} </P>}
       </Div>
       <Div>
         {tags.map((tag: string) => {
