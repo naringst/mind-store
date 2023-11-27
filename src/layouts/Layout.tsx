@@ -37,7 +37,7 @@ const RightDiv = styled.div`
 `;
 
 const HomeDiv = styled.div`
-  width: 83.5%;
+  width: 90%;
   padding-left: 0px;
   padding-right: 10px;
   position: fixed;
