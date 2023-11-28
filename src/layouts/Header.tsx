@@ -9,7 +9,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const openModalHandler = (e: any) => {
     e.preventDefault();
-    dispatch(modalActions.openModal());
+    dispatch(modalActions.toggleModal(true));
   };
 
   return (

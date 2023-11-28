@@ -29,7 +29,7 @@ export default function Note({
   const dispatch = useDispatch();
 
   const updateNote = (e: any) => {
-    dispatch(modalActions.openModal());
+    dispatch(modalActions.toggleModal(true));
     dispatch(noteActions.updateNote(e.target.id));
     //isEdit으로 바꾸고
     //해당 노트를 보내
@@ -67,6 +67,11 @@ export default function Note({
       })
     );
   };
+
+  console.log(parse(content));
+  const symbolProperties = Object.getOwnPropertySymbols(parse(content));
+  console.log(symbolProperties);
+  console.log(typeof parse(content));
 
   return (
     <NoteDiv id={id} color={color}>

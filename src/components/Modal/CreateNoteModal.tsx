@@ -38,7 +38,7 @@ export default function CreateNoteModal() {
   //노트 모달 닫기 버튼
   const closeModalHandler = (e: any) => {
     e.preventDefault();
-    dispatch(modalActions.closeModal());
+    dispatch(modalActions.toggleModal(false));
     dispatch(addedTagsActions.deleteAllTag());
     dispatch(noteActions.exitUpdateNote());
   };
@@ -96,7 +96,7 @@ export default function CreateNoteModal() {
         color: backgroundColor,
       })
     );
-    dispatch(modalActions.closeModal());
+    dispatch(modalActions.toggleModal(false));
     dispatch(addedTagsActions.deleteAllTag());
     setTitle("");
     setContents("");
@@ -118,7 +118,7 @@ export default function CreateNoteModal() {
         color: backgroundColor,
       })
     );
-    dispatch(modalActions.closeModal());
+    dispatch(modalActions.toggleModal(false));
     dispatch(addedTagsActions.deleteAllTag());
     setTitle("");
     setContents("");

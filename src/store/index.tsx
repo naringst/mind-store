@@ -1,7 +1,6 @@
 import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 import { addedTagsSlice, tagSlice } from "./tag";
 import { noteSlice } from "./note";
-import { useDispatch } from "react-redux";
 import { NoteType } from "../types/NoteType";
 import { trashSlice } from "./trash";
 import { archiveSlice } from "./archive";
@@ -11,12 +10,11 @@ const modalSlice = createSlice({
   name: "modal",
   initialState: { isModalOpen: false, isEdit: false },
   reducers: {
-    openModal(state) {
-      state.isModalOpen = true;
+    //toggle modal
+    toggleModal(state, action: PayloadAction<boolean>) {
+      state.isModalOpen = action.payload;
     },
-    closeModal(state) {
-      state.isModalOpen = false;
-    },
+
     openUpdateModal(state, action: PayloadAction<NoteType>) {
       state.isModalOpen = true;
       state.isEdit = true;
