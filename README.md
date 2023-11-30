@@ -7,7 +7,14 @@
 ### 태그
 
 - 태그 생성, 삭제
+  <br/>
+  ![메모앱태그](https://github.com/naringst/note-app/assets/92130993/43c4a8d9-a1e2-4bdf-9b5d-d3c1bc36d84d)
+
 - 노트 내 태그 지정
+  <br/>
+  ![노트추가](https://github.com/naringst/note-app/assets/92130993/06c611ba-3d46-4541-adc8-430a09cb5125)
+
+  
 
 ### 노트
 
