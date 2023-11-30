@@ -48,7 +48,7 @@ export const noteSlice = createSlice({
           : note
       );
     },
-
+    //리덕스 밖으로 
     setSortCategory(state, action: PayloadAction<string>) {
       if (action.payload === "lowFirst") {
         state.noteList = state.noteList.sort((a: any, b: any): number => {

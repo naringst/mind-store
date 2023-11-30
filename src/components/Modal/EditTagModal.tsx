@@ -10,8 +10,6 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function EditTagModal() {
   const [inputText, setInputText] = useState<string>("");
-  const [id, setId] = useState<number>(0);
-
   const tagList = useSelector((state: any) => state.tag.tagList);
 
   const dispatch = useDispatch();

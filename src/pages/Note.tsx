@@ -31,11 +31,9 @@ export default function Note({
   const updateNote = (e: any) => {
     dispatch(modalActions.toggleModal(true));
     dispatch(noteActions.updateNote(e.target.id));
-    //isEdit으로 바꾸고
-    //해당 노트를 보내
   };
+
   const DeleteNoteHandler = (e: any) => {
-    //노트 삭제
     dispatch(noteActions.deleteNote(e.target.id));
     dispatch(
       trashActions.addTrash({
@@ -52,7 +50,6 @@ export default function Note({
   };
 
   const archivingNoteHandler = (e: any) => {
-    //아카이빙에 저장
     dispatch(noteActions.deleteNote(e.target.id));
     dispatch(
       archiveActions.addArchive({
@@ -67,11 +64,6 @@ export default function Note({
       })
     );
   };
-
-  console.log(parse(content));
-  const symbolProperties = Object.getOwnPropertySymbols(parse(content));
-  console.log(symbolProperties);
-  console.log(typeof parse(content));
 
   return (
     <NoteDiv id={id} color={color}>

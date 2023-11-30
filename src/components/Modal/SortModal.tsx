@@ -13,7 +13,6 @@ export default function SortModal() {
     dispatch(sortModalActions.closeSortModal());
   };
 
-  //선택된 항목을 setSortOption()으로 dispatch
   const handleChangeOption = (e: any) => {
     dispatch(sortModalActions.setSortOption(e.target.id));
     setSelectData(e.target.id);

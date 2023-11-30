@@ -86,7 +86,6 @@ export default function Home() {
 
 const NoteSearchInput = styled.input`
   padding: 2px 10px;
-
   width: 100%;
   height: 40px;
   border: 1px solid #d9d9d9;

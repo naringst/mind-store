@@ -17,7 +17,6 @@ export default function CreateNoteModal() {
   const [priority, setPriority] = useState("low");
   const dispatch = useDispatch();
 
-  //추가된 태그
   const addedTagList = useSelector((state: any) => state.addedTag.addedTagList);
   const updateNote = useSelector((state: any) => state.note.updateNote);
   const isEdit = useSelector((state: any) => state.note.isEdit);
@@ -28,14 +27,13 @@ export default function CreateNoteModal() {
       setContents(updateNote[0].content);
       setBackgroundColor(updateNote[0].color);
       setPriority(updateNote[0].priority);
-      //태그 렌더링?
     }
   };
 
   useEffect(() => {
     checkIsEdit();
   }, []);
-  //노트 모달 닫기 버튼
+
   const closeModalHandler = (e: any) => {
     e.preventDefault();
     dispatch(modalActions.toggleModal(false));
@@ -77,8 +75,6 @@ export default function CreateNoteModal() {
   const selectPriority = (e: any) => {
     setPriority(e.target.value);
   };
-
-  //handleQuillContent();
 
   //노트 생성
   const createNewNote = (e: any) => {
