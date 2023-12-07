@@ -3,83 +3,31 @@ import { styled } from "styled-components";
 import { AiOutlinePushpin, AiTwotonePushpin } from "react-icons/ai";
 import { Tag } from "../components/Modal/Modal.styles";
 import { NoteType } from "../types/NoteType";
-import {
-  AiOutlineFolderOpen,
-  AiOutlineDelete,
-  AiOutlineEdit,
-} from "react-icons/ai";
+
 import { useDispatch } from "react-redux";
 import { noteActions } from "../store/note";
 import parse from "html-react-parser";
-import { modalActions } from "../store";
-import { trashActions } from "../store/trash";
-import { archiveActions } from "../store/archive";
+import { getEachButton } from "../utils/getEachButton";
 
-export default function Note({
-  id,
-  title,
-  priority,
-  pinned,
-  content,
-  tags,
-  createdTime,
-  color,
-}: NoteType) {
-  const [isPinned, setIspinned] = useState<boolean>(pinned);
+export default function Note(newNote: NoteType) {
+  const [isPinned, setIspinned] = useState<boolean>(newNote.pinned);
   const dispatch = useDispatch();
-
-  const updateNote = (e: any) => {
-    dispatch(modalActions.toggleModal(true));
-    dispatch(noteActions.updateNote(e.target.id));
-  };
-
-  const DeleteNoteHandler = (e: any) => {
-    dispatch(noteActions.deleteNote(e.target.id));
-    dispatch(
-      trashActions.addTrash({
-        id,
-        title,
-        priority,
-        pinned,
-        content,
-        tags,
-        createdTime,
-        color,
-      })
-    );
-  };
-
-  const archivingNoteHandler = (e: any) => {
-    dispatch(noteActions.deleteNote(e.target.id));
-    dispatch(
-      archiveActions.addArchive({
-        id,
-        title,
-        priority,
-        pinned,
-        content,
-        tags,
-        createdTime,
-        color,
-      })
-    );
-  };
-
+  const type = "archive";
   return (
-    <NoteDiv id={id} color={color}>
+    <NoteDiv id={newNote.id} color={newNote.color}>
       <BottomDiv>
-        {title.length > 8 ? (
-          <NoteTitle>{title.substring(0, 7)}..</NoteTitle>
+        {newNote.title.length > 8 ? (
+          <NoteTitle>{newNote.title.substring(0, 7)}..</NoteTitle>
         ) : (
-          <NoteTitle>{title}</NoteTitle>
+          <NoteTitle>{newNote.title}</NoteTitle>
         )}
         <FlexDiv>
-          <Priority>{priority}</Priority>
+          <Priority>{newNote.priority}</Priority>
           <Pin
-            id={id}
+            id={newNote.id}
             onClick={(e: any) => {
               setIspinned(!isPinned);
-              dispatch(noteActions.setPinState([id, !isPinned]));
+              dispatch(noteActions.setPinState([newNote.id, !isPinned]));
             }}
           >
             {isPinned ? <AiTwotonePushpin /> : <AiOutlinePushpin />}
@@ -87,29 +35,18 @@ export default function Note({
         </FlexDiv>
       </BottomDiv>
       <Div>
-        {parse(content) ? <P>{parse(content)} </P> : <P>{parse(content)} </P>}
+        {parse(newNote.content) ? (
+          <P>{parse(newNote.content)} </P>
+        ) : (
+          <P>{parse(newNote.content)} </P>
+        )}
       </Div>
       <Div>
-        {tags.map((tag: string) => {
-          return <Tag>{tag}</Tag>;
+        {newNote.tags.map((eachTag: string) => {
+          return <Tag>{eachTag}</Tag>;
         })}
       </Div>
-      <BottomDiv>
-        <CreatedTimeP>{createdTime.toLocaleString()}</CreatedTimeP>
-        <IconsDiv>
-          <StyledAiOutlineEdit size="25px" id={id} onClick={updateNote} />
-          <StyledAiOutlineFolderOpen
-            id={id}
-            size="25px"
-            onClick={archivingNoteHandler}
-          />
-          <StyledAiOutlineDelete
-            id={id}
-            size="25px"
-            onClick={DeleteNoteHandler}
-          />
-        </IconsDiv>
-      </BottomDiv>
+      <BottomDiv>{getEachButton(type, newNote, dispatch)}</BottomDiv>
     </NoteDiv>
   );
 }
@@ -152,33 +89,12 @@ const P = styled.p`
   word-wrap: break-word;
   padding-bottom: 10px 0;
 `;
-const IconsDiv = styled.div`
-  display: flex;
-  width: max-content;
-  justify-content: space-between;
-`;
 
-const StyledAiOutlineEdit = styled(AiOutlineEdit)`
-  margin: 0 3px;
-`;
-
-const StyledAiOutlineFolderOpen = styled(AiOutlineFolderOpen)`
-  margin: 0 3px;
-`;
-
-const StyledAiOutlineDelete = styled(AiOutlineDelete)`
-  margin: 0 3px;
-`;
-const BottomDiv = styled.div`
+export const BottomDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 5px 0;
   align-items: center;
-`;
-
-const CreatedTimeP = styled.p`
-  width: 100px;
-  word-wrap: break-word;
 `;
 
 const Div = styled.div`
