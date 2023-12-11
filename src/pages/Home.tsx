@@ -6,6 +6,10 @@ import { NoteType } from "../types/NoteType";
 import { sortModalActions } from "../store";
 import { useEffect, useState } from "react";
 
+export interface NoteProps {
+  note: NoteType;
+  type: string;
+}
 export default function Home() {
   let NoteList = useSelector((state: any) => state.note.noteList);
   const [userInput, setUserInput] = useState<string>("");
@@ -64,17 +68,17 @@ export default function Home() {
         </div>
       ) : (
         <NoteGrid>
-          {NoteList.map((note: NoteType) => {
+          {NoteList.map((newNote: NoteType) => {
             return (
               <Note
-                id={note.id}
-                title={note.title}
-                content={note.content}
-                priority={note.priority}
-                pinned={note.pinned}
-                tags={note.tags}
-                createdTime={note.createdTime}
-                color={note.color}
+                id={newNote.id}
+                title={newNote.title}
+                content={newNote.content}
+                priority={newNote.priority}
+                pinned={newNote.pinned}
+                tags={newNote.tags}
+                createdTime={newNote.createdTime}
+                color={newNote.color}
               ></Note>
             );
           })}

@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { tagModalActions } from "../store";
 import { TagType } from "../store/tag";
+import { Resizable } from "re-resizable";
 
 export default function Sidebar() {
   const dispatch = useDispatch();
@@ -21,8 +22,19 @@ export default function Sidebar() {
 
   const tags = useSelector((state: any) => state.tag.tagList);
 
+  const [width, setWidth] = React.useState<number>(232);
+  const [height, setHeight] = React.useState<string>("100vh");
+
   return (
-    <SideDiv>
+    <SideDiv
+      size={{ width, height }}
+      minWidth={0}
+      maxWidth={290}
+      onResizeStop={(e, direction, ref, d) => {
+        setWidth(width + d.width);
+        setHeight(height + d.height);
+      }}
+    >
       <aside>
         <StyledLink to="/">
           <H1>기록공간</H1>
@@ -85,16 +97,15 @@ export default function Sidebar() {
   );
 }
 
-const SideDiv = styled.div`
-  height: 100%;
+const SideDiv = styled(Resizable)`
   background-color: #fff0ba;
   padding: 0;
-  position: absolute;
   left: 0;
   height: 100vh;
   top: 0;
   width: 232px;
   padding-left: 20px;
+  border-right: 3px solid #d9d9d9;
 
   @media screen and (max-width: 1016px) {
     visibility: hidden;
